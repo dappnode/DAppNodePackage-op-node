@@ -1,0 +1,43 @@
+{
+  "name": "op-node.dnp.dappnode.eth",
+  "version": "0.1.0",
+  "upstreamVersion": "v1.1.3",
+  "upstreamRepo": "ethereum-optimism/op-node",
+  "upstreamArg": "UPSTREAM_VERSION",
+  "shortDescription": "Optimism Rollup node",
+  "description": "The Optimism rollup node is the component responsible for deriving the L2 chain from L1 blocks (and their associated receipts)",
+  "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
+  "categories": ["ETH2.0"],
+  "keywords": ["optimism", "rollup", "ethereum", "node"],
+  "type": "service",
+  "architectures": ["linux/amd64", "linux/arm64"],
+  "links": {
+    "homepage": "https://github.com/dappnode/DAppNodePackage-op-node#readme",
+    "api": "http://op-node.dappnode:9545"
+  },
+  "exposable": [
+    {
+      "name": "OP Node JSON-RPC (HTTP)",
+      "description": "HTTP-JSON-RPC endpoint for OP",
+      "serviceName": "op-node",
+      "port": 9545
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dappnode/DAppNodePackage-op-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dappnode/DAppNodePackage-op-node/issues"
+  },
+  "license": "GPL-3.0",
+  "requirements": {
+    "minimumDappnodeVersion": "0.2.50"
+  },
+  "globalEnvs": [
+    {
+      "envs": ["EXECUTION_CLIENT_MAINNET"],
+      "services": ["op-node"]
+    }
+  ]
+}

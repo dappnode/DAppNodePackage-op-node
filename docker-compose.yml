@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  op-node:
+    build:
+      context: op-node
+      args:
+        UPSTREAM_VERSION: v1.1.3
+    environment:
+      L2_CLIENT: op-geth.dnp.dappnode.eth
+      USER_JWT: ""
+    restart: unless-stopped
+    image: "geth.op-node.dnp.dappnode.eth:0.1.0"
