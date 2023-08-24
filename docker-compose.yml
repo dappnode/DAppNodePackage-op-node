@@ -9,4 +9,3 @@ services:
       L2_CLIENT: op-geth.dnp.dappnode.eth
       USER_JWT: ""
     restart: unless-stopped
-    image: "geth.op-node.dnp.dappnode.eth:0.1.0"

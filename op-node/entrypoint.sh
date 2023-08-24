@@ -21,16 +21,16 @@ esac
 
 case $L2_CLIENT in
 "op-geth.dnp.dappnode.eth")
-  L2_RPC="http://op-geth.dnp.dappnode:8545"
+  L2_ENGINE="http://op-geth.dnp.dappnode:8551"
   JWT_PATH="/config/security/op-geth/jwtsecret.hex"
   ;;
 "op-erigon.dnp.dappnode.eth")
-  L2_RPC="http://op-erigon.dnp.dappnode:8545"
+  L2_ENGINE="http://op-erigon.dnp.dappnode:8551"
   JWT_PATH="/config/security/op-erigon/jwtsecret.hex"
   ;;
 *)
   echo "Unknown value for L2_CLIENT: $L2_CLIENT"
-  L2_RPC=$L2_CLIENT
+  L2_ENGINE=$L2_CLIENT
   mkdir -p /config/security/user
   echo $USER_JWT >/config/security/user/jwtsecret.hex
   JWT_PATH="/config/security/user/jwtsecret.hex"
@@ -38,9 +38,9 @@ case $L2_CLIENT in
 esac
 
 op-node --l1=$L1_RPC \
-  --l2=$L2_RPC \
-  --network=beta-1 \
+  --l2=$L2_ENGINE \
+  --l2.jwt-secret=$JWT_PATH \
+  --network=mainnet \
   --rpc.addr=0.0.0.0 \
   --rpc.port=9545 \
-  --l2.jwt-secret=$JWT_PATH \
   ${EXTRA_FLAGS}
