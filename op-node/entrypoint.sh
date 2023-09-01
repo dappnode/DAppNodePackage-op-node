@@ -21,11 +21,11 @@ esac
 
 case $L2_CLIENT in
 "op-geth.dnp.dappnode.eth")
-  L2_ENGINE="http://op-geth.dnp.dappnode:8551"
+  L2_ENGINE="http://op-geth.dappnode:8551"
   JWT_PATH="/config/security/op-geth/jwtsecret.hex"
   ;;
 "op-erigon.dnp.dappnode.eth")
-  L2_ENGINE="http://op-erigon.dnp.dappnode:8551"
+  L2_ENGINE="http://op-erigon.dappnode:8551"
   JWT_PATH="/config/security/op-erigon/jwtsecret.hex"
   ;;
 *)
@@ -37,10 +37,10 @@ case $L2_CLIENT in
   ;;
 esac
 
-op-node --l1=$L1_RPC \
+exec op-node --network=mainnet \
+  --l1=$L1_RPC \
   --l2=$L2_ENGINE \
   --l2.jwt-secret=$JWT_PATH \
-  --network=mainnet \
   --rpc.addr=0.0.0.0 \
   --rpc.port=9545 \
   ${EXTRA_FLAGS}
