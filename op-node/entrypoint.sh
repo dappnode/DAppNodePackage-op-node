@@ -22,18 +22,18 @@ esac
 case $L2_CLIENT in
 "op-geth.dnp.dappnode.eth")
   L2_ENGINE="http://op-geth.dappnode:8551"
-  JWT_PATH="/config/security/op-geth/jwtsecret.hex"
+  JWT_PATH="/security/op-geth/jwtsecret.hex"
   ;;
 "op-erigon.dnp.dappnode.eth")
   L2_ENGINE="http://op-erigon.dappnode:8551"
-  JWT_PATH="/config/security/op-erigon/jwtsecret.hex"
+  JWT_PATH="/security/op-erigon/jwtsecret.hex"
   ;;
 *)
   echo "Unknown value for L2_CLIENT: $L2_CLIENT"
   L2_ENGINE=$L2_CLIENT
   mkdir -p /config/security/user
-  echo $USER_JWT >/config/security/user/jwtsecret.hex
-  JWT_PATH="/config/security/user/jwtsecret.hex"
+  echo $USER_JWT >/security/user/jwtsecret.hex
+  JWT_PATH="/security/user/jwtsecret.hex"
   ;;
 esac
 
