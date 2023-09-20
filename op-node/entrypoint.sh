@@ -29,7 +29,7 @@ else
   exit 1
 fi
 
-case $L2_CLIENT in
+case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 "op-geth.dnp.dappnode.eth")
   L2_ENGINE="http://op-geth.dappnode:8551"
   JWT_PATH="/security/op-geth/jwtsecret.hex"
@@ -39,11 +39,9 @@ case $L2_CLIENT in
   JWT_PATH="/security/op-erigon/jwtsecret.hex"
   ;;
 *)
-  echo "Unknown value for L2_CLIENT: $L2_CLIENT"
-  L2_ENGINE=$L2_CLIENT
-  mkdir -p /config/security/user
-  echo $USER_JWT >/security/user/jwtsecret.hex
-  JWT_PATH="/security/user/jwtsecret.hex"
+  echo "Unknown value for _DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT: $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT"
+  sleep 60
+  exit 1
   ;;
 esac
 

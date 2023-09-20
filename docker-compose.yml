@@ -8,3 +8,4 @@ services:
     environment:
       - CUSTOM_L1_RPC
     restart: unless-stopped
+    image: "op-node.op-node.dnp.dappnode.eth:0.1.0"
