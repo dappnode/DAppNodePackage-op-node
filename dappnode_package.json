@@ -36,7 +36,7 @@
   },
   "globalEnvs": [
     {
-      "envs": ["EXECUTION_CLIENT_MAINNET"],
+      "envs": ["EXECUTION_CLIENT_MAINNET", "OP_EXECUTION_CLIENT"],
       "services": ["op-node"]
     }
   ]
