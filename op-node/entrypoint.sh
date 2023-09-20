@@ -1,23 +1,33 @@
 #!/bin/sh
 
-case $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET in
-"geth.dnp.dappnode.eth")
-  L1_RPC="http://geth.dappnode:8545"
-  ;;
-"nethermind.public.dappnode.eth")
-  L1_RPC="http://nethermind.public.dappnode:8545"
-  ;;
-"erigon.dnp.dappnode.eth")
-  L1_RPC="http://erigon.dappnode:8545"
-  ;;
-"besu.public.dappnode.eth")
-  L1_RPC="http://besu.public.dappnode:8545"
-  ;;
-*)
-  echo "Unknown value for _DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET: $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET"
-  L1_RPC=$_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET
-  ;;
-esac
+# If CUSTOM_L1_RPC is set, use it. Otherwise, use the proper value depending on the _DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET variable
+if [ ! -z "$CUSTOM_L1_RPC" ]; then
+  L1_RPC=$CUSTOM_L1_RPC
+elif [ ! -z "$_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET" ]; then
+  case $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET in
+  "geth.dnp.dappnode.eth")
+    L1_RPC="http://geth.dappnode:8545"
+    ;;
+  "nethermind.public.dappnode.eth")
+    L1_RPC="http://nethermind.public.dappnode:8545"
+    ;;
+  "erigon.dnp.dappnode.eth")
+    L1_RPC="http://erigon.dappnode:8545"
+    ;;
+  "besu.public.dappnode.eth")
+    L1_RPC="http://besu.public.dappnode:8545"
+    ;;
+  *)
+    echo "Unknown value for _DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET: $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET"
+    sleep 60
+    exit 1
+    ;;
+  esac
+else
+  echo "No L1_RPC value set"
+  sleep 60
+  exit 1
+fi
 
 case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 "op-geth.dnp.dappnode.eth")

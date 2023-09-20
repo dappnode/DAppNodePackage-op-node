@@ -5,5 +5,7 @@ services:
       context: op-node
       args:
         UPSTREAM_VERSION: v1.1.3
+    environment:
+      - CUSTOM_L1_RPC
     restart: unless-stopped
     image: "op-node.op-node.dnp.dappnode.eth:0.1.0"
