@@ -6,6 +6,5 @@ services:
       args:
         UPSTREAM_VERSION: v1.1.3
     environment:
-      L2_CLIENT: op-geth.dnp.dappnode.eth
-      USER_JWT: ""
+      - CUSTOM_L1_RPC
     restart: unless-stopped
