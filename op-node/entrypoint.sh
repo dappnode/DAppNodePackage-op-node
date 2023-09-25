@@ -45,10 +45,22 @@ case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
   ;;
 esac
 
-exec op-node --network=mainnet \
-  --l1=$L1_RPC \
-  --l2=$L2_ENGINE \
-  --l2.jwt-secret=$JWT_PATH \
-  --rpc.addr=0.0.0.0 \
-  --rpc.port=9545 \
-  ${EXTRA_FLAGS}
+while true; do
+  op-node --network=mainnet \
+    --l1="$L1_RPC" \
+    --l2="$L2_ENGINE" \
+    --l2.jwt-secret="$JWT_PATH" \
+    --rpc.addr=0.0.0.0 \
+    --rpc.port=9545 \
+    ${EXTRA_FLAGS}
+
+  STATUS=$?
+
+  if [ $STATUS -ne 0 ]; then
+    echo "[ERROR - entrypoint ] op-node command failed with status $STATUS. Retrying in 1 minute..."
+    echo "[ERROR - entrypoint ] L2 Client might be unreachable or not ready yet (downloading chain data can take hours)"
+    sleep 60
+  else
+    break
+  fi
+done
