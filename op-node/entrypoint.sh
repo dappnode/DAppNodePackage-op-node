@@ -3,19 +3,24 @@
 # If CUSTOM_L1_RPC is set, use it. Otherwise, use the proper value depending on the _DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET variable
 if [ ! -z "$CUSTOM_L1_RPC" ]; then
   L1_RPC=$CUSTOM_L1_RPC
+  L1_RPC_TRUST=false
 elif [ ! -z "$_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET" ]; then
   case $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET in
   "geth.dnp.dappnode.eth")
     L1_RPC="http://geth.dappnode:8545"
+    L1_RPC_TRUST=true
     ;;
   "nethermind.public.dappnode.eth")
     L1_RPC="http://nethermind.public.dappnode:8545"
+    L1_RPC_TRUST=true
     ;;
   "erigon.dnp.dappnode.eth")
     L1_RPC="http://erigon.dappnode:8545"
+    L1_RPC_TRUST=true
     ;;
   "besu.public.dappnode.eth")
     L1_RPC="http://besu.public.dappnode:8545"
+    L1_RPC_TRUST=true
     ;;
   *)
     echo "Unknown value for _DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET: $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET"
@@ -48,11 +53,16 @@ esac
 while true; do
   op-node --network=mainnet \
     --l1="$L1_RPC" \
+    --l1.trustrpc=$L1_RPC_TRUST \
     --l2="$L2_ENGINE" \
     --l2.jwt-secret="$JWT_PATH" \
+    --p2p.advertise.ip="${_DAPPNODE_GLOBAL_DOMAIN}" \
+    --p2p.listen.ip=0.0.0.0 \
+    --p2p.listen.tcp=9222 \
+    --p2p.listen.udp=9222 \
     --rpc.addr=0.0.0.0 \
     --rpc.port=9545 \
-    ${EXTRA_FLAGS}
+    ${EXTRA_OPTS}
 
   STATUS=$?
 
