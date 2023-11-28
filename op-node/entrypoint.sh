@@ -53,7 +53,7 @@ esac
 while true; do
   op-node --network=mainnet \
     --l1="$L1_RPC" \
-    --l1.trust.rpc=$L1_RPC_TRUST \
+    --l1.trustrpc=$L1_RPC_TRUST \
     --l2="$L2_ENGINE" \
     --l2.jwt-secret="$JWT_PATH" \
     --rpc.addr=0.0.0.0 \
