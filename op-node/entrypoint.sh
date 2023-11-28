@@ -56,6 +56,10 @@ while true; do
     --l1.trustrpc=$L1_RPC_TRUST \
     --l2="$L2_ENGINE" \
     --l2.jwt-secret="$JWT_PATH" \
+    --p2p.advertise.ip="${_DAPPNODE_GLOBAL_DOMAIN}" \
+    --p2p.listen.ip=0.0.0.0 \
+    --p2p.listen.tcp=9222 \
+    --p2p.listen.udp=9222 \
     --rpc.addr=0.0.0.0 \
     --rpc.port=9545 \
     ${EXTRA_OPTS}
