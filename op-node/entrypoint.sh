@@ -3,7 +3,7 @@
 # If CUSTOM_L1_RPC is set, use it. Otherwise, use the proper value depending on the _DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET variable
 if [ ! -z "$CUSTOM_L1_RPC" ]; then
   L1_RPC=$CUSTOM_L1_RPC
-  L1_RPC_TRUST=false
+  L1_RPC_TRUST=true
 elif [ ! -z "$_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET" ]; then
   case $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_MAINNET in
   "geth.dnp.dappnode.eth")
@@ -36,11 +36,11 @@ fi
 
 case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 "op-geth.dnp.dappnode.eth")
-  L2_ENGINE="http://op-geth.dappnode:8551"
+  L2_ENGINE="ws://op-geth.dappnode:8551"
   JWT_PATH="/security/op-geth/jwtsecret.hex"
   ;;
 "op-erigon.dnp.dappnode.eth")
-  L2_ENGINE="http://op-erigon.dappnode:8551"
+  L2_ENGINE="ws://op-erigon.dappnode:8551"
   JWT_PATH="/security/op-erigon/jwtsecret.hex"
   ;;
 *)
@@ -52,10 +52,10 @@ esac
 
 while true; do
   op-node --network=mainnet \
-    --l1="$L1_RPC" \
+    --l1=${L1_RPC} \
     --l1.trustrpc=$L1_RPC_TRUST \
-    --l2="$L2_ENGINE" \
-    --l2.jwt-secret="$JWT_PATH" \
+    --l2=${L2_ENGINE} \
+    --l2.jwt-secret=${JWT_PATH} \
     --p2p.advertise.ip="${_DAPPNODE_GLOBAL_DOMAIN}" \
     --p2p.listen.ip=0.0.0.0 \
     --p2p.listen.tcp=9222 \
