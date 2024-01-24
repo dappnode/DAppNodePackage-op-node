@@ -46,7 +46,7 @@ case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 esac
 
 while true; do
-  op-node --network=mainnet \
+  op-node --network=op-mainnet \
     --l1="$L1_RPC" \
     --l2="$L2_ENGINE" \
     --l2.jwt-secret="$JWT_PATH" \
