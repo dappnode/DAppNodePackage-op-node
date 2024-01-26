@@ -1,7 +1,7 @@
 {
   "name": "op-node.dnp.dappnode.eth",
   "version": "0.1.1",
-  "upstreamVersion": "v1.4.2",
+  "upstreamVersion": "op-batcher/v1.4.3",
   "upstreamRepo": "ethereum-optimism/optimism",
   "upstreamArg": "UPSTREAM_VERSION",
   "shortDescription": "Optimism Rollup node",
