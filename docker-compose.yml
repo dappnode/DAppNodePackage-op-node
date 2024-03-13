@@ -4,8 +4,9 @@ services:
     build:
       context: op-node
       args:
-        UPSTREAM_VERSION: v1.4.2
+        UPSTREAM_VERSION: v1.7.1
     environment:
       - CUSTOM_L1_RPC
+      - CUSTOM_L1_BEACON_API
     restart: unless-stopped
-    image: "op-node.op-node.dnp.dappnode.eth:0.1.1"
+    image: "op-node.op-node.dnp.dappnode.eth:0.1.2"
