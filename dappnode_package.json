@@ -1,6 +1,6 @@
 {
   "name": "op-node.dnp.dappnode.eth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "upstreamVersion": "v1.7.1",
   "upstreamRepo": "ethereum-optimism/optimism",
   "upstreamArg": "UPSTREAM_VERSION",
