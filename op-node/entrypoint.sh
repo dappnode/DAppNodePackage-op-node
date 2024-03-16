@@ -36,11 +36,11 @@ fi
 
 case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 "op-geth.dnp.dappnode.eth")
-  L2_ENGINE="http://op-geth.dappnode:8551"
+  L2_ENGINE="ws://op-geth.dappnode:8551"
   JWT_PATH="/security/op-geth/jwtsecret.hex"
   ;;
 "op-erigon.dnp.dappnode.eth")
-  L2_ENGINE="http://op-erigon.dappnode:8551"
+  L2_ENGINE="ws://op-erigon.dappnode:8551"
   JWT_PATH="/security/op-erigon/jwtsecret.hex"
   ;;
 *)
