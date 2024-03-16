@@ -34,6 +34,39 @@ else
   exit 1
 fi
 
+# If CUSTOM_L1_BEACON_API is set, use it. Otherwise, use the proper value depending on the _DAPPNODE_GLOBAL_CONSENSUS_CLIENT_MAINNET variable
+
+if [ ! -z "$CUSTOM_L1_BEACON_API" ]; then
+  L1_BEACON_API=$CUSTOM_L1_BEACON_API
+elif [ ! -z "$_DAPPNODE_GLOBAL_CONSENSUS_CLIENT_MAINNET" ]; then
+  case $_DAPPNODE_GLOBAL_CONSENSUS_CLIENT_MAINNET in
+  "lodestar.dnp.dappnode.eth")
+    L1_BEACON_API="http://beacon-chain.lodestar.dappnode:3500"
+    ;;
+  "lighthouse.dnp.dappnode.eth")
+    L1_BEACON_API="http://beacon-chain.lighthouse.dappnode:3500"
+    ;;
+  "prysm.dnp.dappnode.eth")
+    L1_BEACON_API="http://beacon-chain.prysm.dappnode:3500"
+    ;;
+  "teku.dnp.dappnode.eth")
+    L1_BEACON_API="http://beacon-chain.teku.dappnode:3500"
+    ;;
+  "nimbus.dnp.dappnode.eth")
+    L1_BEACON_API="http://nimbus.dappnode:4500"
+    ;;
+  *)
+    echo "Unknown value for _DAPPNODE_GLOBAL_CONSENSUS_CLIENT_MAINNET: $_DAPPNODE_GLOBAL_CONSENSUS_CLIENT_MAINNET"
+    sleep 60
+    exit 1
+    ;;
+  esac
+else
+  echo "No L1_BEACON_API value set"
+  sleep 60
+  exit 1
+fi
+
 case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 "op-geth.dnp.dappnode.eth")
   L2_ENGINE="ws://op-geth.dappnode:8551"
@@ -51,15 +84,12 @@ case $_DAPPNODE_GLOBAL_OP_EXECUTION_CLIENT in
 esac
 
 while true; do
-  op-node --network=mainnet \
-    --l1=${L1_RPC} \
+  op-node --network=op-mainnet \
+    --l1="$L1_RPC" \
     --l1.trustrpc=$L1_RPC_TRUST \
-    --l2=${L2_ENGINE} \
-    --l2.jwt-secret=${JWT_PATH} \
-    --p2p.advertise.ip="${_DAPPNODE_GLOBAL_DOMAIN}" \
-    --p2p.listen.ip=0.0.0.0 \
-    --p2p.listen.tcp=9222 \
-    --p2p.listen.udp=9222 \
+    --l1.beacon="$L1_BEACON_API" \
+    --l2="$L2_ENGINE" \
+    --l2.jwt-secret="$JWT_PATH" \
     --rpc.addr=0.0.0.0 \
     --rpc.port=9545 \
     ${EXTRA_OPTS}

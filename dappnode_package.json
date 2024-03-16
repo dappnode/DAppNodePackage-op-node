@@ -1,8 +1,8 @@
 {
   "name": "op-node.dnp.dappnode.eth",
-  "version": "0.1.0",
-  "upstreamVersion": "v1.1.4",
-  "upstreamRepo": "ethereum-optimism/op-node",
+  "version": "0.1.2",
+  "upstreamVersion": "v1.7.1",
+  "upstreamRepo": "ethereum-optimism/optimism",
   "upstreamArg": "UPSTREAM_VERSION",
   "shortDescription": "Optimism Rollup node",
   "description": "The Optimism rollup node is the component responsible for deriving the L2 chain from L1 blocks (and their associated receipts)",
@@ -10,7 +10,7 @@
   "categories": ["ETH2.0"],
   "keywords": ["optimism", "rollup", "ethereum", "node"],
   "type": "service",
-  "architectures": ["linux/amd64", "linux/arm64"],
+  "architectures": ["linux/amd64"],
   "links": {
     "homepage": "https://github.com/dappnode/DAppNodePackage-op-node#readme",
     "api": "http://op-node.dappnode:9545"
@@ -36,7 +36,7 @@
   },
   "globalEnvs": [
     {
-      "envs": ["EXECUTION_CLIENT_MAINNET", "OP_EXECUTION_CLIENT", "DOMAIN"],
+      "envs": ["EXECUTION_CLIENT_MAINNET", "CONSENSUS_CLIENT_MAINNET","OP_EXECUTION_CLIENT"],
       "services": ["op-node"]
     }
   ]
