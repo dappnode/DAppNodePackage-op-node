@@ -86,6 +86,7 @@ while true; do
     --l2.jwt-secret="$JWT_PATH" \
     --rpc.addr=0.0.0.0 \
     --rpc.port=9545 \
+    --syncmode=execution-layer \
     ${EXTRA_FLAGS}
 
   STATUS=$?
