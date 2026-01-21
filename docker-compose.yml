@@ -4,7 +4,7 @@ services:
     build:
       context: op-node
       args:
-        UPSTREAM_VERSION: op-proposer/v1.10.2
+        UPSTREAM_VERSION: op-dispute-mon/v1.5.0
     environment:
       - CUSTOM_L1_RPC
       - CUSTOM_L1_BEACON_API
