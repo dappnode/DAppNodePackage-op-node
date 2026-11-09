@@ -1,9 +1,13 @@
 {
   "name": "op-node.dnp.dappnode.eth",
   "version": "0.1.3",
-  "upstreamVersion": "op-proposer/v1.10.2",
-  "upstreamRepo": "ethereum-optimism/optimism",
-  "upstreamArg": "UPSTREAM_VERSION",
+  "upstream": [
+    {
+      "repo": "ethereum-optimism/optimism",
+      "version": "op-proposer/v1.10.2",
+      "arg": "UPSTREAM_VERSION"
+    }
+  ],
   "shortDescription": "Optimism Rollup node",
   "description": "The Optimism rollup node is the component responsible for deriving the L2 chain from L1 blocks (and their associated receipts)",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
